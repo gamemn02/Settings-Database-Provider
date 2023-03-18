@@ -1,0 +1,1 @@
+<p>Many apps in other stores rely on editing the settings database for Android system to allow, for example, users to customize their phones. Now android doesn't allow apps that target API level above 22 to edit some settings. Using <i>Settings Database Provider</i>, apps can offer user to install this lightweight package to extend the app capability.</p>

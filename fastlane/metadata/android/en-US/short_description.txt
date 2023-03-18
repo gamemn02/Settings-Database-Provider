@@ -1,0 +1,1 @@
+allow other apps to edit all parameters in android settings.db database
