@@ -1,1 +1,54 @@
-<p>Many apps in other stores rely on editing the settings database for Android system to allow, for example, users to customize their phones. Now android doesn't allow apps that target API level above 22 to edit some settings. Using <i>Settings Database Provider</i>, apps can offer user to install this lightweight package to extend the app capability.</p>
+<p>Extend your Android app's capabilities by allowing seamless access to the settings database, even on newer Android versions.</p>
+
+<h2>Installation and Usage</h2>
+
+<p>Simply install the Settings Database Provider package. Other apps are responsible for detecting the provider and making use of it. Ignore any warnings about compatibility with older Android versions, that's totally fine.</p>
+
+<h3>Grant Permission (Optional, but Important):</h3>
+<p>For editing secure and global tables, after installation, there's a quick ADB command to grant provider the permission:</p>
+
+<h4>Using PC with ADB</h4>
+
+<pre><code>adb shell pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h4>Using LADB or Brevent</h4>
+
+<pre><code>pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h2>For Android 14</h2>
+
+<p>Android 14 introduces restrictions on installing applications that target SDK levels lower than 23. Also, some users reported inability to modify any setting but worked using the provider. To install Settings Database Provider on devices running Android 14, special installation steps are required:</p>
+
+<h3>Using PC with ADB</h3>
+
+<p>To install via ADB from a PC, use the following command, replacing sdp-v1.1.apk with the actual file path to the APK.</p>
+
+<pre><code>adb install --bypass-low-target-sdk-block sdp-v1.1.apk
+</code></pre>
+
+<h3>Using LADB or Brevent</h3>
+
+<p>You can also install the APK using local ADB alternatives like LADB or Brevent. Use the following commands in your local ADB shell:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p>For some cases (error message like "Unknown option --bypass-low-target-sdk-block"), try:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | su -c pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p><code>106579</code> is the apk exact file size in bytes (for v1.1)</p>
+
+<h2>How it works</h2>
+
+<p>The package contains only a Content Provider component, that works as a bridge between your app and the settings database. By targeting SDK level 22, the provider circumvents restrictions imposed on newer applications, allowing other apps to modify all system settings without targeting an outdated SDK level themselves and enabling broader functionality for system customization apps</p>
+
+<h2>Support</h2>
+
+<p>For any issues or support questions, please file an issue on the GitHub repository. You can also join our Telegram group or contact us via email. Contributions and feedback are welcome.</p>
+
+<p>Telegram Group: <a href="https://t.me/+o140MdSojRI2MjA0">Settings Database Editor</a></p>
+<p>Email: contact@netvorgroup.com</p>
