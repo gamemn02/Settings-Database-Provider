@@ -1,0 +1,54 @@
+<p>Perluas kemampuan aplikasi Android Anda dengan mengizinkan akses yang mulus ke basis data pengaturan, bahkan pada versi Android yang lebih baru.</p>
+
+<h2>Pemasangan dan Penggunaan</h2>
+
+<p>Cukup pasang paket Penyedia Basis Data Pengaturan. Aplikasi lain bertanggung jawab untuk mendeteksi penyedia dan menggunakannya. Abaikan semua peringatan tentang kompatibilitas dengan versi Android yang lebih lama, itu sepenuhnya normal.</p>
+
+<h3>Izinkan Akses (Opsional, tetapi Penting):</h3>
+<p>Untuk mengedit tabel-tabel yang aman dan global, setelah pemasangan, ada perintah ADB cepat untuk memberi izin kepada penyedia:</p>
+
+<h4>Menggunakan PC dengan ADB</h4>
+
+<pre><code>adb shell pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h4>Menggunakan LADB atau Brevent</h4>
+
+<pre><code>pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h2>Untuk Android 14</h2>
+
+<p>Android 14 memperkenalkan pembatasan pada pemasangan aplikasi yang ditargetkan pada level SDK di bawah 23. Juga, beberapa pengguna melaporkan ketidakmampuan untuk mengubah pengaturan apa pun tetapi berhasil menggunakan penyedia. Untuk memasang Penyedia Basis Data Pengaturan pada perangkat yang menjalankan Android 14, langkah-langkah instalasi khusus diperlukan:</p>
+
+<h3>Menggunakan PC dengan ADB</h3>
+
+<p>Untuk memasang melalui ADB dari PC, gunakan perintah berikut, ganti sdp-v1.1.apk dengan jalur file APK yang sebenarnya.</p>
+
+<pre><code>adb install --bypass-low-target-sdk-block sdp-v1.1.apk
+</code></pre>
+
+<h3>Menggunakan LADB atau Brevent</h3>
+
+<p>Anda juga dapat memasang APK menggunakan alternatif ADB lokal seperti LADB atau Brevent. Gunakan perintah berikut di shell ADB lokal Anda:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p>Untuk beberapa kasus (pesan kesalahan seperti "Unknown option --bypass-low-target-sdk-block"), coba:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | su -c pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p><code>106579</code> adalah ukuran file apk yang tepat dalam byte (untuk v1.1)</p>
+
+<h2>Cara Kerjanya</h2>
+
+<p>Paket ini hanya berisi komponen Penyedia Konten, yang berfungsi sebagai jembatan antara aplikasi Anda dan basis data pengaturan. Dengan menargetkan level SDK 22, penyedia menghindari pembatasan yang diberlakukan pada aplikasi baru, memungkinkan aplikasi lain untuk mengubah semua pengaturan sistem tanpa menargetkan level SDK yang ketinggalan zaman dan memungkinkan fungsionalitas yang lebih luas untuk aplikasi kustomisasi sistem</p>
+
+<h2>Dukungan</h2>
+
+<p>Untuk masalah atau pertanyaan dukungan, silakan buat isu di repositori GitHub. Anda juga dapat bergabung dengan grup Telegram kami atau menghubungi kami melalui email. Kontribusi dan umpan balik sangat kami harapkan.</p>
+
+<p>Grup Telegram: <a href="https://t.me/+o140MdSojRI2MjA0">Settings Database Editor</a></p>
+<p>Email: contact@netvorgroup.com</p>

@@ -1,0 +1,54 @@
+<p>Amplíe las capacidades de su aplicación Android al permitir un acceso sin problemas a la base de datos de configuración, incluso en las versiones más recientes de Android.</p>
+
+<h2>Instalación y Uso</h2>
+
+<p>Simplemente instale el paquete Proveedor de Base de Datos de Configuración. Otras aplicaciones son responsables de detectar el proveedor y hacer uso de él. Ignore cualquier advertencia sobre la compatibilidad con versiones antiguas de Android, eso está completamente bien.</p>
+
+<h3>Concesión de Permiso (Opcional, pero Importante):</h3>
+<p>Para editar tablas seguras y globales, después de la instalación, hay un comando ADB rápido para otorgar permiso al proveedor:</p>
+
+<h4>Usando PC con ADB</h4>
+
+<pre><code>adb shell pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h4>Usando LADB o Brevent</h4>
+
+<pre><code>pm grant com.netvor.settings.database.provider android.permission.WRITE_SECURE_SETTINGS
+</code></pre>
+
+<h2>Para Android 14</h2>
+
+<p>Android 14 introduce restricciones en la instalación de aplicaciones que apuntan a niveles de SDK inferiores a 23. Además, algunos usuarios informaron la incapacidad de modificar cualquier configuración, pero funcionó usando el proveedor. Para instalar el Proveedor de Base de Datos de Configuración en dispositivos que ejecutan Android 14, se requieren pasos de instalación especiales:</p>
+
+<h3>Usando PC con ADB</h3>
+
+<p>Para instalar a través de ADB desde un PC, use el siguiente comando, reemplazando sdp-v1.1.apk con la ruta de archivo real del APK.</p>
+
+<pre><code>adb install --bypass-low-target-sdk-block sdp-v1.1.apk
+</code></pre>
+
+<h3>Usando LADB o Brevent</h3>
+
+<p>También puede instalar el APK utilizando alternativas locales de ADB como LADB o Brevent. Use los siguientes comandos en su shell de ADB local:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p>Para algunos casos (mensaje de error como "Opción desconocida --bypass-low-target-sdk-block"), intente:</p>
+
+<pre><code>cat sdcard/Download/sdp-v1.1.apk | su -c pm install --bypass-low-target-sdk-block -S 106579
+</code></pre>
+
+<p><code>106579</code> es el tamaño exacto del archivo APK en bytes (para v1.1)</p>
+
+<h2>Cómo Funciona</h2>
+
+<p>El paquete contiene solo un componente Proveedor de Contenido, que funciona como un puente entre su aplicación y la base de datos de configuración. Al dirigirse al nivel de SDK 22, el proveedor evita las restricciones impuestas a las aplicaciones más nuevas, permitiendo que otras aplicaciones modifiquen todas las configuraciones del sistema sin apuntar a un nivel de SDK obsoleto y permitiendo una funcionalidad más amplia para las aplicaciones de personalización del sistema</p>
+
+<h2>Soporte</h2>
+
+<p>Para cualquier problema o pregunta de soporte, por favor presente un problema en el repositorio de GitHub. También puede unirse a nuestro grupo de Telegram o contactarnos por correo electrónico. Las contribuciones y comentarios son bienvenidos.</p>
+
+<p>Grupo de Telegram: <a href="https://t.me/+o140MdSojRI2MjA0">Settings Database Editor</a></p>
+<p>Correo electrónico: contact@netvorgroup.com</p>

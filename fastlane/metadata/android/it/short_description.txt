@@ -1,0 +1,1 @@
+Consenti ad altre app di modificare tutti i parametri nel database delle impostazioni di Android settings.db
